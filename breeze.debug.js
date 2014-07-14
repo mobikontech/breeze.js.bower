@@ -15627,8 +15627,12 @@ breeze.SaveOptions= SaveOptions;
                 request.headers["If-Match"] = extraMetadata.etag;
             }
         }
-        request.requestUri = routePrefix + uriKey;
 
+        if (!core.stringStartsWith(uriKey, routePrefix)) {
+            request.requestUri = routePrefix + uriKey;
+        } else {
+            request.requestUri = uriKey;
+        }
     }
 
     function getUriKey(aspect) {
